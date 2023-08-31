@@ -3704,7 +3704,10 @@ static int load_module(struct load_info *info, const char __user *uargs,
 	struct module *mod;
 	long err = 0;
 	char *after_dashes;
-
+	//addcode加入这两个flags,跳过内核模块验证，强制加载
+        flags |= MODULE_INIT_IGNORE_MODVERSIONS;
+        flags |= MODULE_INIT_IGNORE_VERMAGIC;
+        //addcode end
 	err = elf_header_check(info);
 	if (err)
 		goto free_copy;
